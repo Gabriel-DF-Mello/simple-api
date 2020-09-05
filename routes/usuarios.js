@@ -27,25 +27,24 @@ router.post("/registrar", async(req, res)=>{
 
         try
         {
-            // TODO: check if user exists
-            // if exists throw new Error("User exists")
 
-            console.log(senha);
-            const senhaHash = await hash(senha, 10);
-            //console.log(senhaHash);
+            mysqlCon.query(`SELECT * FROM usuarios WHERE email='${email}'`,(err, rows, fields)=>{
+                if(err) return res.send({error: err.message});
 
-            //res.send(senhaHash);
-            mysqlCon.query(`INSERT INTO usuarios VALUES(null, '${nome}', '${email}', '${senhaHash}', ${permit})`, (err, rows, fields)=>{
-                if(!err)
-                {
-                    res.send(rows);
-                }else
-                {
-                    console.log(err)
-                }
+                if(rows.length > 0) return res.send({message: "O usuário ja existe"});
+
+                hash(senha, 10, (err, senhaHash)=>{
+                    if(err) return res.send({error: err.message})
+
+                    mysqlCon.query(`INSERT INTO usuarios VALUES(null, '${nome}', '${email}', '${senhaHash}', ${permit})`, (err, rows, fields)=>{
+                        if(err) return res.send({error: err.message})
+
+                        res.send(rows);
+                    });
+                });
             });
         }catch(error){
-
+            res.send({error: error.message})
         }
     }
 });

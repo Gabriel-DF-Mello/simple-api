@@ -6,7 +6,7 @@ let mysqlCon = mysql.createConnection({
     password : "",
     database : "simpleapi_db",
     multipleStatements : true,
-    dateStrings: 'datetime'
+    dateStrings: 'date'
 })
 
 mysqlCon.connect((err)=>{
