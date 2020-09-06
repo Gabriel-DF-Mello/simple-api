@@ -35,10 +35,6 @@ app.use(
     })
 );
 
-app.get("/", (req, res)=>{
-    res.send("Hello World!");
-});
-
 app.post("/login", (req, res)=>{
     if(req.body && req.body.email && req.body.senha){
         const email = req.body.email;
@@ -89,36 +85,6 @@ app.post("/logout", (_req, res) => {
     })
 });
 
-app.post("/protected", async(req, res)=>{
-    try{
-        const userId = isAuth(req);
-        if(userId !== null){
-            res.send({
-                data: `Informações protegidas`
-            })
-        }
-    }catch(err){
-        res.send({
-            error: `${err.message}`
-        })
-    }
-})
-
-app.post("/admin", async(req, res)=>{
-    try{
-        const userId = isAdmin(req);
-        if(userId !== null){
-            res.send({
-                data: `Informações de administrador`
-            })
-        }
-    }catch(err){
-        res.send({
-            error: `${err.message}`
-        })
-    }
-})
-
 app.post("/refresh_token", (req, res)=>{
     const token = req.cookies.refreshtoken;
 
@@ -149,7 +115,5 @@ app.post("/refresh_token", (req, res)=>{
         sendAccessToken(res, req, accesstoken);
     });
 })
-
-// TODO: change all routes to protected routes
 
 app.listen(process.env.PORT);
