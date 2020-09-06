@@ -82,6 +82,6 @@ O banco de dados do sistema possui as seguintes tabelas
 ### Recebimentos
 - id: (int) identificador
 - valor: (numeric) valor recebido
-- data_p: (date) data em que o recebimento foi ou vai ser realizado
+- data_r: (date) data em que o recebimento foi ou vai ser realizado
 - realizado: (boolean) denota se o valor ja foi depositado no caixa ou foi apenas agendado.
 
