@@ -27,6 +27,8 @@ router.get("/", async(req, res)=>{
     }
 });
 
+
+// O cadastro foi liberado a qualquer utilizador da API sem necessidade de autenticação para facilitar o uso e teste
 router.post("/registrar", async(req, res)=>{
     // Confere se a req possui todos os campos necessários para uma inserção
     if(req.body && req.body.nome && req.body.email && req.body.senha && req.body.permit){
@@ -80,6 +82,7 @@ router.delete('/:id', async(req, res) =>{
     }
 });
 
+// O email foi propositalmente deixado de fora da edição do usuário
 router.patch('/:id', async(req, res) =>{
     try{
         const userId = isAdmin(req);
