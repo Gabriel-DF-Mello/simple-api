@@ -1,7 +1,5 @@
 # simple-api
-This is a repository for a simple API, 
-
-Isso é um repositório para uma API simples
+This is a repository for my first Node JS API
 
 
 ## Informações Gerais
